@@ -1,0 +1,26 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@asif/middleware": ["libs/middleware/src/index.ts"],
+      "@asif/prisma-client": ["libs/db/prisma-client/src/index.ts"],
+      "@asif/prisma-schema": ["libs/db/prisma-schema/src/index.ts"],
+      "@asif/services": ["libs/services/src/index.ts"],
+      "@asif/utils": ["libs/utils/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
