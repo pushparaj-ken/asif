@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE `AdminUser` ADD COLUMN `firstname` VARCHAR(191) NOT NULL DEFAULT ' ',
+    ADD COLUMN `isactive` INTEGER NOT NULL DEFAULT 0,
+    ADD COLUMN `lastname` VARCHAR(191) NOT NULL DEFAULT ' ',
+    ADD COLUMN `phonenumber` VARCHAR(191) NOT NULL DEFAULT ' ';

@@ -13,8 +13,9 @@ const app = express();
 setupSwaggerUsers(app);
 
 app.use(cors({
-  origin: 'http://localhost:3000' // Replace with your React app's origin
+  origin: ['http://localhost:3000', 'http://admin.getstek.com', 'http://getstek.com']
 }));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

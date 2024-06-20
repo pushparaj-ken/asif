@@ -28,6 +28,10 @@
  *         - email
  *         - password
  *         - roleId
+ *         - firstname
+ *         - lastname
+ *         - phonenumber
+ *         - isactive
  *       properties:
  *         email:
  *           type: string
@@ -38,6 +42,18 @@
  *         roleId:
  *           type: number
  *           example: 1
+ *         firstname:
+ *           type: string
+ *           example: firstname
+ *         lastname:
+ *           type: string
+ *           example: lastname
+ *         phonenumber:
+ *           type: string
+ *           example: phonenumber
+ *         isactive:
+ *           type: number
+ *           example: 0
  */
 
 /**

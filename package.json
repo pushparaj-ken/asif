@@ -12,11 +12,14 @@
     "e2e": "npx nx e2e asif",
     "start": "npx nx serve asif "
   },
+  "prisma": {
+    "schema": "./libs/db/prisma-schema/prisma/schema.prisma"
+  },
   "private": true,
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.598.0",
     "@aws-sdk/client-s3": "^3.598.0",
-    "@prisma/client": "^5.15.0",
+    "@prisma/client": "^5.15.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
@@ -71,7 +74,7 @@
     "jest-environment-node": "^29.4.1",
     "nx": "19.3.0",
     "prettier": "^2.6.2",
-    "prisma": "^5.15.0",
+    "prisma": "^5.15.1",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "typescript": "~5.4.2"

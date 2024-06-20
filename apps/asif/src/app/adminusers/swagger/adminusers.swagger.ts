@@ -16,6 +16,10 @@
  *         - email
  *         - password
  *         - roleId
+ *         - firstname
+ *         - lastname
+ *         - phonenumber
+ *         - isactive
  *       properties:
  *         email:
  *           type: string
@@ -25,7 +29,19 @@
  *           example: 12345678
  *         roleId:
  *           type: number
- *           example: 3
+ *           example: 1
+ *         firstname:
+ *           type: string
+ *           example: firstname
+ *         lastname:
+ *           type: string
+ *           example: lastname
+ *         phonenumber:
+ *           type: string
+ *           example: phonenumber
+ *         isactive:
+ *           type: number
+ *           example: 0
  *     updateAdminUsers:
  *       type: object
  *       required:
