@@ -5,7 +5,8 @@ import cors from "cors";
 import { errorHandler } from "@asif/utils";
 import { setupSwaggerUsers } from '@asif/services';
 import IndexRouter from "./app/index/index.routes";
-
+import dotenv from 'dotenv';
+dotenv.config();
 const port = process.env.PORT_USER ? Number(process.env.PORT_USER) : 3000;
 
 const app = express();

@@ -8,7 +8,7 @@ import { middleware } from "@asif/middleware";
 
 router.post('/add', validationMiddleware(CreateAdminUsersDto), middleware, AdminUsersController.AddAdminUsers);
 
-router.put('/update/:id', validationMiddleware(CreateAdminUsersDto), middleware, AdminUsersController.UpadteAdminUsers);
+router.put('/update/:id', validationMiddleware(CreateAdminUsersDto), AdminUsersController.UpadteAdminUsers);
 
 router.delete('/delete/:id', middleware, AdminUsersController.DeleteAdminUsers);
 

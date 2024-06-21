@@ -42,7 +42,7 @@ model AdminUser {
 model Banner {
   id                Int      @id @default(autoincrement())
   title             String   
-  shortDescription  String
+  shortDescription  String   @db.VarChar(255)
   buttonName        String
   link              String
   image             Image[]

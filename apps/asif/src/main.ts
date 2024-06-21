@@ -8,6 +8,8 @@ import AuthAdmin from "./app/auth/auth.routes";
 import RoleAdmin from "./app/role/role.routes";
 import UserAdmin from "./app/adminusers/adminusers.routes";
 import BannerAdmin from "./app/banner/banner.routes";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
