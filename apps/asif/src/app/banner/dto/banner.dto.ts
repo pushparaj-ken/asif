@@ -17,4 +17,8 @@ export class CreateBannerDto {
   @IsString()
   link: string;
 
+  @IsNotEmpty()
+  @IsString()
+  youtubelink: string;
+
 }

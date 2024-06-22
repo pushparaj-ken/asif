@@ -45,6 +45,7 @@ model Banner {
   shortDescription  String   @db.VarChar(255)
   buttonName        String
   link              String
+  youtubelink       String   @db.VarChar(255)
   image             Image[]
   slug              String   @unique @default(cuid())
   createdAt         DateTime @default(now())
