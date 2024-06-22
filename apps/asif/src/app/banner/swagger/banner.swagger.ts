@@ -30,6 +30,9 @@
  *         link:
  *           type: string
  *           example: link
+ *         youtubelink:
+ *           type: string
+ *           example: link
  *     updateBanner:
  *       type: object
  *       required:
@@ -48,6 +51,9 @@
  *           type: string
  *           example: buttonName
  *         link:
+ *           type: string
+ *           example: link
+ *         youtubelink:
  *           type: string
  *           example: link
  */
