@@ -1,18 +1,18 @@
 import express from 'express';
 const router = express.Router();
-import RoleController from "./role.controller";
-import { CreateRoleDto } from './dto/role.dto';
+import Controller from "./role.controller";
+import { CreateDto } from './dto/role.dto';
 import { validationMiddleware } from '@asif/services';
 import { middleware } from "@asif/middleware";
 
 
-router.post('/add', validationMiddleware(CreateRoleDto), middleware, RoleController.AddRole);
+router.post('/add', validationMiddleware(CreateDto), middleware, Controller.Add);
 
-router.put('/update/:id', validationMiddleware(CreateRoleDto), middleware, RoleController.UpadteRole);
+router.put('/update/:id', validationMiddleware(CreateDto), middleware, Controller.Upadte);
 
-router.delete('/delete/:id', middleware, RoleController.DeleteRole);
+router.delete('/delete/:id', middleware, Controller.Delete);
 
-router.get('/list', middleware, RoleController.RoleDetails);
+router.get('/list', middleware, Controller.Details);
 
 export default router;
 

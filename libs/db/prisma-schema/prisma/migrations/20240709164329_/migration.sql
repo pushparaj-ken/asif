@@ -1,0 +1,32 @@
+-- AlterTable
+ALTER TABLE `Aboutus` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE `AdvantageList` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE `CallToAction` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE `Category` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE `Course` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE `CourseCount` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE `HomeAdvantage` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE `Instructor` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE `InstructorSection` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE `NewsLetter` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE `Tab` ADD COLUMN `status` INTEGER NOT NULL DEFAULT 0;

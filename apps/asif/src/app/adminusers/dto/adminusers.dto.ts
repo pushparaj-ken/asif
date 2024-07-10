@@ -1,6 +1,6 @@
 import { IsEmail, IsInt, IsNotEmpty, IsString, MinLength, IsOptional } from 'class-validator';
 
-export class CreateAdminUsersDto {
+export class CreateDto {
   @IsEmail()
   @IsNotEmpty()
   email: string;

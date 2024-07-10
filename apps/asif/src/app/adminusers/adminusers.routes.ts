@@ -1,18 +1,18 @@
 import express from 'express';
 const router = express.Router();
-import { CreateAdminUsersDto } from './dto/adminusers.dto';
-import AdminUsersController from "./adminusers.controller";
+import { CreateDto } from './dto/adminusers.dto';
+import Controller from "./adminusers.controller";
 import { validationMiddleware } from '@asif/services';
 import { middleware } from "@asif/middleware";
 
 
-router.post('/add', validationMiddleware(CreateAdminUsersDto), middleware, AdminUsersController.AddAdminUsers);
+router.post('/add', validationMiddleware(CreateDto), middleware, Controller.Add);
 
-router.put('/update/:id', validationMiddleware(CreateAdminUsersDto), AdminUsersController.UpadteAdminUsers);
+router.put('/update/:id', validationMiddleware(CreateDto), Controller.Upadte);
 
-router.delete('/delete/:id', middleware, AdminUsersController.DeleteAdminUsers);
+router.delete('/delete/:id', middleware, Controller.Delete);
 
-router.get('/list', middleware, AdminUsersController.AdminUsersDetails);
+router.get('/list', middleware, Controller.Details);
 
 export default router;
 

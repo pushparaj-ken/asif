@@ -1,11 +1,14 @@
+import bcrypt from "bcryptjs";
 import { PrismaService, Prisma } from '@asif/prisma-client';
 const prisma = new PrismaService();
 import _ from 'lodash';
 
-export class AdminUsersController {
-  async AddAdminUsers(req: any, res: any, next: any) {
+export class Controller {
+  async Add(req: any, res: any, next: any) {
     const data = req.body;
     try {
+      const passwordencrypt = await bcrypt.hash(data.password, 10);
+      data.password = passwordencrypt
       const Create = await prisma.adminUser.create({ data: data })
       res.status(200).json({
         success: true,
@@ -17,7 +20,7 @@ export class AdminUsersController {
     }
   }
 
-  async UpadteAdminUsers(req: any, res: any, next: any) {
+  async Upadte(req: any, res: any, next: any) {
     const data = req.body;
     const params = req.params;
     try {
@@ -38,7 +41,7 @@ export class AdminUsersController {
     }
   }
 
-  async DeleteAdminUsers(req: any, res: any, next: any) {
+  async Delete(req: any, res: any, next: any) {
     const data = req.body;
     const params = req.params;
     try {
@@ -58,9 +61,9 @@ export class AdminUsersController {
     }
   }
 
-  async AdminUsersDetails(req: any, res: any, next: any) {
+  async Details(req: any, res: any, next: any) {
     try {
-      const { email, slug, roleId, skip, take, cursor, orderBy } = req.query;
+      const { email, slug, roleId, skip, take, cursor, orderBy,order } = req.query;
       let where: any = {}
       if (email) {
         where.email = email
@@ -76,7 +79,7 @@ export class AdminUsersController {
         take: take ? parseInt(take) : undefined,
         cursor: cursor ? { id: parseInt(cursor) } : undefined,
         where,
-        orderBy: orderBy ? { [orderBy.toString()]: 'asc' } : undefined,
+        orderBy: orderBy ? { [orderBy.toString()]:  order ||'asc' } : undefined,
         include: { role: true }
       });
       if (List.length > 0) {
@@ -96,5 +99,5 @@ export class AdminUsersController {
 }
 
 
-const adminUsersController = new AdminUsersController();
-export default adminUsersController;
+const controller = new Controller();
+export default controller;

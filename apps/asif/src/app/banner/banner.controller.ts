@@ -4,9 +4,9 @@ import _ from 'lodash';
 import { upload } from "@asif/services";
 const foldername = "Brand";
 
-export class BannerController {
+export class Controller {
 
-  async AddBanner(req: any, res: any, next: any) {
+  async Add(req: any, res: any, next: any) {
     const data = req.body;
     try {
       const Create = await prisma.banner.create({ data: data })
@@ -20,7 +20,7 @@ export class BannerController {
     }
   }
 
-  async UpadteBanner(req: any, res: any, next: any) {
+  async Upadte(req: any, res: any, next: any) {
     const data = req.body;
     const params = req.params;
     try {
@@ -41,7 +41,7 @@ export class BannerController {
     }
   }
 
-  async DeleteBanner(req: any, res: any, next: any) {
+  async Delete(req: any, res: any, next: any) {
     const data = req.body;
     const params = req.params;
     try {
@@ -61,9 +61,9 @@ export class BannerController {
     }
   }
 
-  async BannerDetails(req: any, res: any, next: any) {
+  async Details(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy } = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy , order} = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug
@@ -76,7 +76,7 @@ export class BannerController {
         take: take ? parseInt(take) : undefined,
         cursor: cursor ? { id: parseInt(cursor) } : undefined,
         where,
-        orderBy: orderBy ? { [orderBy.toString()]: 'asc' } : undefined,
+        orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
         include: { image: true }
       });
       if (List.length > 0) {
@@ -95,7 +95,7 @@ export class BannerController {
     }
   }
 
-  async AddBannerImage(req: any, res: any, next: any) {
+  async AddImage(req: any, res: any, next: any) {
     const data = req.body;
     const files = req.files;
 
@@ -119,7 +119,7 @@ export class BannerController {
     }
   }
 
-  async UpadteBannerImage(req: any, res: any, next: any) {
+  async UpadteImage(req: any, res: any, next: any) {
     const data = req.body;
     const params = req.params;
     const files = req.files;
@@ -134,7 +134,7 @@ export class BannerController {
           Datafile.url = image.Location;
         }
         const where = { slug: params.id }
-        const Role = await prisma.image.update({ data: Datafile, where })
+        const Update = await prisma.image.update({ data: Datafile, where })
         res.status(200).json({
           success: true,
           code: 200,
@@ -149,7 +149,7 @@ export class BannerController {
     }
   }
 
-  async DeleteBannerImage(req: any, res: any, next: any) {
+  async DeleteImage(req: any, res: any, next: any) {
     const data = req.body;
     const params = req.params;
     try {
@@ -173,5 +173,5 @@ export class BannerController {
 }
 
 
-const bannerController = new BannerController();
-export default bannerController;
+const controller = new Controller();
+export default controller;

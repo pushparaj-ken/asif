@@ -8,6 +8,19 @@ import AuthAdmin from "./app/auth/auth.routes";
 import RoleAdmin from "./app/role/role.routes";
 import UserAdmin from "./app/adminusers/adminusers.routes";
 import BannerAdmin from "./app/banner/banner.routes";
+import TabAdmin from "./app/tab/tab.routes";
+import CategoryAdmin from "./app/category/category.routes";
+import CourseAdmin from "./app/course/course.routes";
+import AboutusAdmin from "./app/aboutus/aboutus.routes";
+import CallActionAdmin from "./app/callaction/callaction.routes";
+import HomeadvnAdmin from "./app/homeadvn/homeadvn.routes";
+import AdvantageAdmin from "./app/advantage/advantage.routes";
+import CourseCountAdmin from "./app/coursecount/coursecount.routes";
+import InstructorSectionAdmin from "./app/instructionsection/instructionsection.routes";
+import InstructorAdmin from "./app/instructor/instructor.routes";
+import NewsLetterAdmin from "./app/newsletter/newsletter.routes";
+
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -29,11 +42,24 @@ app.use(cookieParser());
 app.get('/', (req, res) => {
   res.send({ message: 'Hello API' });
 });
+import bcrypt from "bcryptjs";
 
 app.use('/api/admin', AuthAdmin);
 app.use('/api/admin/role', RoleAdmin)
 app.use('/api/admin/user', UserAdmin)
 app.use('/api/admin/banner', BannerAdmin)
+app.use('/api/admin/tab', TabAdmin)
+app.use('/api/admin/category', CategoryAdmin)
+app.use('/api/admin/course', CourseAdmin)
+app.use('/api/admin/aboutus', AboutusAdmin)
+app.use('/api/admin/callaction', CallActionAdmin)
+app.use('/api/admin/homeadvn', HomeadvnAdmin)
+app.use('/api/admin/advantage', AdvantageAdmin)
+app.use('/api/admin/coursecount', CourseCountAdmin)
+app.use('/api/admin/instructorsection', InstructorSectionAdmin)
+app.use('/api/admin/instructor', InstructorAdmin)
+app.use('/api/admin/newsletter', NewsLetterAdmin)
+
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
   errorHandler(err, req, res, next);

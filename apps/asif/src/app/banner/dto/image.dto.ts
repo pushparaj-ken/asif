@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, IsInt, IsOptional } from 'class-validator';
 
-export class CreateBannerImageDto {
+export class CreateImageDto {
 
   @IsOptional()
   url: string;

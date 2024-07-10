@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateBannerDto {
+export class CreateDto {
   @IsNotEmpty()
   @IsString()
   title: string;
