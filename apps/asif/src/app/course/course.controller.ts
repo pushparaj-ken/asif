@@ -10,7 +10,7 @@ export class Controller {
     const data = req.body;
     const files = req.files;
     try {
-      data.categoryId = parseInt(data.categoryId );
+      data.categoryId = parseInt(data.categoryId);
       data.orderby = parseInt(data.orderby);
       if (files.courseImage) {
         let { buffer, originalname } = files.courseImage[0];
@@ -42,7 +42,7 @@ export class Controller {
     const files = req.files;
     try {
       if (params.id !== '' && params.id !== null && params.id !== undefined) {
-        data.categoryId = parseInt(data.categoryId );
+        data.categoryId = parseInt(data.categoryId);
         data.orderby = parseInt(data.orderby);
         const where = { slug: params.id }
         if (files.courseImage) {
@@ -95,7 +95,7 @@ export class Controller {
 
   async Details(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy ,tabId,order} = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy, CategoryID, order } = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug
@@ -103,8 +103,8 @@ export class Controller {
       if (name) {
         where.name = { contains: name.toString() }
       }
-      if (tabId) {
-        where.tabId = parseInt(tabId)
+      if (CategoryID) {
+        where.category = { id: parseInt(CategoryID) }
       }
       const List = await prisma.course.findMany({
         skip: skip ? parseInt(skip) : undefined,
