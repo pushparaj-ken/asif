@@ -4,9 +4,13 @@ import logger from "morgan";
 import cors from "cors";
 import { errorHandler } from "@asif/utils";
 import { setupSwaggerUsers } from '@asif/services';
-import IndexRouter from "./app/index/index.routes";
 import dotenv from 'dotenv';
 dotenv.config();
+
+import IndexRouter from "./app/index/index.routes";
+import SubscriptionRouter from "./app/subscription/subscription.routes";
+import ContactUsRouter from "./app/contactus/contactus.routes";
+
 const port = process.env.PORT_USER ? Number(process.env.PORT_USER) : 3000;
 
 const app = express();
@@ -28,6 +32,9 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/users/index', IndexRouter);
+app.use('/api/users/subscription', SubscriptionRouter)
+app.use('/api/users/contactus', ContactUsRouter)
+
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
   errorHandler(err, req, res, next);

@@ -26,5 +26,7 @@ router.get('/instructor', IndexController.Instructor);
 
 router.get('/newsletter', IndexController.NewsLetter);
 
+router.post('/sendmail', IndexController.SendMail);
+
 export default router;
 

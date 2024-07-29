@@ -19,6 +19,10 @@ import CourseCountAdmin from "./app/coursecount/coursecount.routes";
 import InstructorSectionAdmin from "./app/instructionsection/instructionsection.routes";
 import InstructorAdmin from "./app/instructor/instructor.routes";
 import NewsLetterAdmin from "./app/newsletter/newsletter.routes";
+import HistoryAdmin from "./app/history/history.routes";
+import GeneralAdmin from "./app/generalsetting/general.routes";
+import SubscriptionAdmin from "./app/subscription/subscription.routes";
+import ContactUsAdmin from "./app/contactus/contactus.routes";
 
 
 import dotenv from 'dotenv';
@@ -59,6 +63,10 @@ app.use('/api/admin/coursecount', CourseCountAdmin)
 app.use('/api/admin/instructorsection', InstructorSectionAdmin)
 app.use('/api/admin/instructor', InstructorAdmin)
 app.use('/api/admin/newsletter', NewsLetterAdmin)
+app.use('/api/admin/history', HistoryAdmin)
+app.use('/api/admin/general', GeneralAdmin)
+app.use('/api/admin/subscription', SubscriptionAdmin)
+app.use('/api/admin/contactus', ContactUsAdmin)
 
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {

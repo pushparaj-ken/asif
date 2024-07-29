@@ -197,3 +197,71 @@ model NewsLetter {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+
+model History {
+  id               Int      @id @default(autoincrement())
+  title            String
+  description      String   @db.Text
+  image_one        String
+  image_two        String
+  image_three      String   
+  history          HistoryAccordian[]
+  status           Int      @default(0)
+  slug             String   @unique @default(cuid())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model HistoryAccordian {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String   @db.Text
+  historyId    Int
+  history      History  @relation(fields: [historyId], references: [id])
+  slug         String   @unique @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+
+model GeneralSetting {
+  id           Int      @id @default(autoincrement())
+  logo         String
+  emailaddress String   
+  phonenumber  String   
+  address      String   
+  facebook     String   
+  instagram    String   
+  skype        String   
+  youtube      String   
+  pinterest    String   
+  twitter      String   
+  slug         String   @unique @default(cuid())
+  status       Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+
+model Subscription {
+  id           Int      @id @default(autoincrement())
+  email        String  
+  slug         String   @unique @default(cuid())
+  status       Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ContactUs {
+  id           Int      @id @default(autoincrement())
+  name         String  
+  email        String  
+  phonenumber  String  
+  subject      String  
+  message      String  
+  slug         String   @unique @default(cuid())
+  status       Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

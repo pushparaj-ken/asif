@@ -5,6 +5,21 @@
  *   description: Index Management
  */
 
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     sendemail:
+ *       type: object
+ *       required:
+ *         - toemail
+ *       properties:
+ *         toemail:
+ *           type: string
+ *           example: pushparaj7396@gmail.com
+ */
+
 /**
  * @swagger
  * /api/users/index/list:
@@ -300,6 +315,23 @@
  *           type: string
  *         required: false
  *         description: Filter by Name
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+
+/**
+ * @swagger
+ * /api/users/index/sendmail:
+ *   post:
+ *     summary: Send Email
+ *     tags: [Index]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/sendemail'
  *     responses:
  *       200:
  *         description: Success
