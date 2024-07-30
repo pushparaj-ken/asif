@@ -1,6 +1,6 @@
 datasource db {
   provider = "mysql"
-  url      = "mysql://asif:Asif@1234$@93.127.203.53:3306/asif"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -206,7 +206,6 @@ model History {
   image_one        String
   image_two        String
   image_three      String   
-  history          HistoryAccordian[]
   status           Int      @default(0)
   slug             String   @unique @default(cuid())
   createdAt        DateTime @default(now())
@@ -217,9 +216,9 @@ model HistoryAccordian {
   id           Int      @id @default(autoincrement())
   title        String
   description  String   @db.Text
-  historyId    Int
-  history      History  @relation(fields: [historyId], references: [id])
   slug         String   @unique @default(cuid())
+  orderby      Int
+  status       Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }

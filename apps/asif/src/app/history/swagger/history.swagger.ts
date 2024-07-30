@@ -151,11 +151,11 @@
  *     createHistoryList:
  *       type: object
  *       required:
- *         - historyId
+ *         - orderby
  *         - title
  *         - description
  *       properties:
- *         historyId:
+ *         orderby:
  *           type: number
  *           example: 1
  *         title:
@@ -167,11 +167,11 @@
  *     updateHistoryList:
  *       type: object
  *       required:
- *         - historyId
+ *         - orderby
  *         - title
  *         - description
  *       properties:
- *         historyId:
+ *         orderby:
  *           type: number
  *           example: 1
  *         title:
@@ -237,6 +237,31 @@
  *           type: string
  *         required: true
  *         description: HistoryList Slug
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+
+
+/**
+ * @swagger
+ * /api/admin/history/accordian/list:
+ *   get:
+ *     summary: List 
+ *     tags: [History]
+ *     parameters:
+ *       - in: query
+ *         name: slug
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by slug
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by name
  *     responses:
  *       200:
  *         description: Success

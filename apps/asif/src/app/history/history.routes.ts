@@ -23,4 +23,6 @@ router.put('/accordian/update/:id', validationMiddleware(CreateHistoryListDto), 
 
 router.delete('/accordian/delete/:id', middleware, Controller.DeleteHistoryList);
 
+router.get('/accordian/list', middleware, Controller.DetailsHistoryList);
+
 export default router;
