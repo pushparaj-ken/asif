@@ -28,5 +28,9 @@ router.get('/newsletter', IndexController.NewsLetter);
 
 router.post('/sendmail', IndexController.SendMail);
 
+router.get('/history', IndexController.History);
+
+router.get('/accordian', IndexController.Accordian);
+
 export default router;
 

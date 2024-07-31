@@ -452,6 +452,76 @@ export class IndexController {
       next(error)
     }
   }
+
+  async History(req: any, res: any, next: any) {
+    try {
+      const { id, slug, name, skip, take, cursor, orderBy, tabId, order } = req.query;
+      let where: any = {}
+      if (slug) {
+        where.slug = slug
+      }
+      if (name) {
+        where.name = { contains: name.toString() }
+      }
+      if (tabId) {
+        where.tabId = parseInt(tabId)
+      }
+      const List = await prisma.history.findMany({
+        skip: skip ? parseInt(skip) : undefined,
+        take: take ? parseInt(take) : undefined,
+        cursor: cursor ? { id: parseInt(cursor) } : undefined,
+        where,
+        orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
+      });
+      if (List.length > 0) {
+        res.status(200).json({
+          success: true,
+          code: 200,
+          status: "Data Reterived Success",
+          Data: List
+        });
+      } else {
+        return next(new Error('No Data Found'))
+      }
+
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async Accordian(req: any, res: any, next: any) {
+    try {
+      const { id, slug, name, skip, take, cursor, orderBy, order } = req.query;
+      let where: any = {}
+      if (slug) {
+        where.slug = slug
+      }
+      if (name) {
+        where.name = { contains: name.toString() }
+      }
+
+      const List = await prisma.historyAccordian.findMany({
+        skip: skip ? parseInt(skip) : undefined,
+        take: take ? parseInt(take) : undefined,
+        cursor: cursor ? { id: parseInt(cursor) } : undefined,
+        where,
+        orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
+      });
+      if (List.length > 0) {
+        res.status(200).json({
+          success: true,
+          code: 200,
+          status: "Data Reterived Success",
+          Data: List
+        });
+      } else {
+        return next(new Error('No Data Found'))
+      }
+
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 
