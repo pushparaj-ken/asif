@@ -91,11 +91,25 @@ model Course {
   button_link      String
   categoryId       Int
   category         Category @relation(fields: [categoryId], references: [id])
+  tariffs          String   @db.Text
+  planning         Planning[] 
   orderby          Int
   slug             String   @unique @default(cuid())
   status           Int      @default(0)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+}
+
+model Planning {
+  id              Int           @id @default(autoincrement())
+  plan_title      String
+  orderby         Int
+  course_id       Int
+  course          Course        @relation(fields: [course_id], references: [id])
+  slug            String        @unique @default(cuid())
+  status          Int           @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }
 
 model Aboutus {

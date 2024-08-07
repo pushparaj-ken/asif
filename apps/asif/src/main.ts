@@ -23,6 +23,7 @@ import HistoryAdmin from "./app/history/history.routes";
 import GeneralAdmin from "./app/generalsetting/general.routes";
 import SubscriptionAdmin from "./app/subscription/subscription.routes";
 import ContactUsAdmin from "./app/contactus/contactus.routes";
+import PlanningAdmin from "./app/planning/planning.routes";
 
 
 import dotenv from 'dotenv';
@@ -67,6 +68,7 @@ app.use('/api/admin/history', HistoryAdmin)
 app.use('/api/admin/general', GeneralAdmin)
 app.use('/api/admin/subscription', SubscriptionAdmin)
 app.use('/api/admin/contactus', ContactUsAdmin)
+app.use('/api/admin/planning', PlanningAdmin)
 
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {

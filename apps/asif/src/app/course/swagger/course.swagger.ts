@@ -21,6 +21,7 @@
  *         - button_name
  *         - button_link
  *         - categoryId
+ *         - tariffs
  *         - orderby
  *       properties:
  *         name:
@@ -47,6 +48,9 @@
  *         categoryId:
  *           type: string
  *           example: Category Name
+ *         tariffs:
+ *           type: string
+ *           example: tariffs
  *         orderby:
  *           type: number
  *           example: 1

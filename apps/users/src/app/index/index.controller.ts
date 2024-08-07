@@ -129,7 +129,7 @@ export class IndexController {
         cursor: cursor ? { id: parseInt(cursor) } : undefined,
         where,
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
-        include: { category: true }
+        include: { category: true, planning: true }
       });
       if (List.length > 0) {
         res.status(200).json({
