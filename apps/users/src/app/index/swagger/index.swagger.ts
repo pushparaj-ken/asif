@@ -337,12 +337,13 @@
  *         description: Success
  */
 
+
 /**
  * @swagger
- * /api/users/index/history:
+ * /api/users/index/accordian:
  *   get:
  *     summary: List 
- *     tags: [History]
+ *     tags: [Index]
  *     parameters:
  *       - in: query
  *         name: slug
@@ -363,7 +364,31 @@
 
 /**
  * @swagger
- * /api/users/index/accordian:
+ * /api/users/index/employee:
+ *   get:
+ *     summary: List 
+ *     tags: [Index]
+ *     parameters:
+ *       - in: query
+ *         name: slug
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by slug
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by name
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+
+/**
+ * @swagger
+ * /api/users/index/history:
  *   get:
  *     summary: List 
  *     tags: [History]

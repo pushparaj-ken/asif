@@ -278,3 +278,29 @@ model ContactUs {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+model Employee {
+  id                        Int      @id @default(autoincrement())
+  name                      String  
+  image                     String  
+  description               String   @db.Text
+  planing_description       String   @db.Text
+  partenaires_image         PartenairesImage [] 
+  orderby                   Int
+  slug                      String   @unique @default(cuid())
+  status                    Int      @default(0)
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+}
+
+model PartenairesImage {
+  id          Int      @id @default(autoincrement())
+  image       String
+  orderby     Int
+  url         String
+  employeeId  Int
+  employee    Employee @relation(fields: [employeeId], references: [id])
+  slug        String   @unique @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

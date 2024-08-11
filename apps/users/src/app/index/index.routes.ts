@@ -32,5 +32,7 @@ router.get('/history', IndexController.History);
 
 router.get('/accordian', IndexController.Accordian);
 
+router.get('/employee', IndexController.Employee);
+
 export default router;
 
