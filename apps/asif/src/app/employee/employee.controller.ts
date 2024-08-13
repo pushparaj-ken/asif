@@ -131,6 +131,7 @@ export class Controller {
         status: "Data Saved Success",
       });
     } catch (error) {
+      console.log("🚀 ~ Controller ~ AddPartenairesImage ~ error:", error.stack)
       next(error);
     }
   }

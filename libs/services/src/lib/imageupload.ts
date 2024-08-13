@@ -45,6 +45,7 @@ export async function upload(file: string, fileName: string, foldername: string)
     try {
       await s3Client.send(new PutObjectCommand(params));
       const fileUrl = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${params.Key}`;
+      console.log("🚀 ~ upload ~ fileUrl:", fileUrl)
       return { Location: fileUrl };
     } catch (error) {
       throw new Error(`S3 upload error: ${error}`);
