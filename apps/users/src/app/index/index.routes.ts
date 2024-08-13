@@ -34,5 +34,7 @@ router.get('/accordian', IndexController.Accordian);
 
 router.get('/employee', IndexController.Employee);
 
+router.get('/news', IndexController.NewsDetails);
+
 export default router;
 

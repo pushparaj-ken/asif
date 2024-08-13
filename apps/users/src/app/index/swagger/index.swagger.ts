@@ -388,6 +388,30 @@
 
 /**
  * @swagger
+ * /api/users/index/news:
+ *   get:
+ *     summary: List 
+ *     tags: [Index]
+ *     parameters:
+ *       - in: query
+ *         name: slug
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by slug
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by name
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+
+/**
+ * @swagger
  * /api/users/index/history:
  *   get:
  *     summary: List 
