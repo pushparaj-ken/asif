@@ -6,12 +6,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Amazon SES configuration
 const config = {
-  region: process.env.AWS_S3_REGION,
+  region: process.env.AWS_S3_REGION!,
   credentials: {
     accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID!,
     secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY!
   }
 };
+console.log("🚀 ~ config:", config)
 
 const s3Client = new S3Client(config);
 
