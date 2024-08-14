@@ -18,7 +18,7 @@ router.delete('/delete/:id', middleware, Controller.Delete);
 
 router.get('/list', middleware, Controller.Details);
 
-router.post('/image/add', validationMiddleware(CreateDto), middleware, upload.fields([{ name: 'image', maxCount: 10 }]), Controller.AddImage);
+router.post('/image/add', validationMiddleware(CreateImageDto), middleware, upload.fields([{ name: 'image', maxCount: 10 }]), Controller.AddImage);
 
 router.put('/image/update/:id', validationMiddleware(CreateImageDto), middleware, upload.fields([{ name: 'image', maxCount: 10 }]), Controller.UpadteImage);
 
