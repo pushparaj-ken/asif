@@ -18,7 +18,7 @@ const app = express();
 setupSwaggerUsers(app);
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://admin.getstek.com', 'http://getstek.com']
+  origin: ['http://localhost:3000', 'http://admin.getstek.com', 'http://getstek.com', 'https://admin.getstek.com', 'https://getstek.com']
 }));
 
 app.use(logger('dev'));
