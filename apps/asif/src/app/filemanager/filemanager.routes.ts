@@ -6,15 +6,15 @@ import multer from "multer";
 
 const upload = multer();
 
-router.get('/list', Controller.listAllObjects);
+router.get('/list', middleware, Controller.listAllObjects);
 
-router.post('/createfolder', Controller.CreateFolder);
+router.post('/createfolder', middleware, Controller.CreateFolder);
 
-router.delete('/deletefolder', Controller.DeleteFolder);
+router.delete('/deletefolder', middleware, Controller.DeleteFolder);
 
-router.delete('/deletefile', Controller.DeleteFile);
+router.delete('/deletefile', middleware, Controller.DeleteFile);
 
-router.post('/commonupload', upload.fields([{ name: 'image', maxCount: 10 }]), Controller.CommonUpload);
+router.post('/commonupload', middleware, upload.fields([{ name: 'image', maxCount: 10 }]), Controller.CommonUpload);
 
 export default router;
 
