@@ -21,4 +21,12 @@ export class CreateDto {
   @IsString()
   youtubelink: string;
 
+  @IsNotEmpty()
+  @IsString()
+  count: string;
+
+  @IsNotEmpty()
+  @IsString()
+  count_title: string;
+
 }

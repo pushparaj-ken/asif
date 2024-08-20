@@ -10,6 +10,7 @@ dotenv.config();
 import IndexRouter from "./app/index/index.routes";
 import SubscriptionRouter from "./app/subscription/subscription.routes";
 import ContactUsRouter from "./app/contactus/contactus.routes";
+import CoursePurchaseRouter from "./app/coursepurchase/coursepurchase.routes";
 
 const port = process.env.PORT_USER ? Number(process.env.PORT_USER) : 3000;
 
@@ -34,6 +35,7 @@ app.get('/', (req, res) => {
 app.use('/api/users/index', IndexRouter);
 app.use('/api/users/subscription', SubscriptionRouter)
 app.use('/api/users/contactus', ContactUsRouter)
+app.use('/api/users/cpurchase', CoursePurchaseRouter)
 
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {

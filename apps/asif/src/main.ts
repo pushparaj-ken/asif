@@ -25,8 +25,9 @@ import SubscriptionAdmin from "./app/subscription/subscription.routes";
 import ContactUsAdmin from "./app/contactus/contactus.routes";
 import PlanningAdmin from "./app/planning/planning.routes";
 import EmployeeAdmin from "./app/employee/employee.routes";
-//import FilemanagerAdmin from "./app/filemanager/filemanager.routes";
+import FilemanagerAdmin from "./app/filemanager/filemanager.routes";
 import NewsAdmin from "./app/news/news.routes";
+import CoursePurchaseAdmin from "./app/coursepurchase/coursepurchase.routes";
 
 
 import dotenv from 'dotenv';
@@ -73,8 +74,9 @@ app.use('/api/admin/subscription', SubscriptionAdmin)
 app.use('/api/admin/contactus', ContactUsAdmin)
 app.use('/api/admin/planning', PlanningAdmin)
 app.use('/api/admin/employee', EmployeeAdmin)
-//app.use('/api/admin/filemanager', FilemanagerAdmin)
+app.use('/api/admin/filemanager', FilemanagerAdmin)
 app.use('/api/admin/news', NewsAdmin)
+app.use('/api/admin/cpurchase', CoursePurchaseAdmin)
 
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {

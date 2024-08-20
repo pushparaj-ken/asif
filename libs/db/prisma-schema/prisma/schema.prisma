@@ -1,35 +1,37 @@
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
   output   = "../../../../node_modules/@prisma/asif/client/prisma-schema"
 }
 
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
 model Role {
   id        Int         @id @default(autoincrement())
   name      String
-  user      AdminUser[]
   slug      String      @unique @default(cuid())
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
+  user      AdminUser[]
 }
 
 model AdminUser {
   id          Int      @id @default(autoincrement())
   email       String   @unique
   password    String
-  firstname   String   @default(" ")
-  lastname    String   @default(" ")
-  phonenumber String   @default(" ")
-  isactive    Int      @default(0)
   roleId      Int
-  role        Role     @relation(fields: [roleId], references: [id])
   slug        String   @unique @default(cuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  firstname   String   @default(" ")
+  isactive    Int      @default(0)
+  lastname    String   @default(" ")
+  phonenumber String   @default(" ")
+  role        Role     @relation(fields: [roleId], references: [id])
+
+  @@index([roleId], map: "AdminUser_roleId_fkey")
 }
 
 model Banner {
@@ -38,32 +40,34 @@ model Banner {
   shortDescription String   @db.VarChar(255)
   buttonName       String
   link             String
-  youtubelink      String   @db.VarChar(255)
-  image            Image[]
   slug             String   @unique @default(cuid())
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+  youtubelink      String   @db.VarChar(255)
+  image            Image[]
 }
 
 model Image {
   id        Int      @id @default(autoincrement())
   url       String
   bannerId  Int
-  banner    Banner   @relation(fields: [bannerId], references: [id])
   slug      String   @unique @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  banner    Banner   @relation(fields: [bannerId], references: [id])
+
+  @@index([bannerId], map: "Image_bannerId_fkey")
 }
 
 model Tab {
   id        Int        @id @default(autoincrement())
   name      String
   orderby   Int
-  category  Category[]
   slug      String     @unique @default(cuid())
-  status    Int        @default(0)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  status    Int        @default(0)
+  category  Category[]
 }
 
 model Category {
@@ -71,17 +75,19 @@ model Category {
   name          String
   categoryImage String
   tabId         Int
-  tab           Tab      @relation(fields: [tabId], references: [id])
   orderby       Int
   slug          String   @unique @default(cuid())
-  status        Int      @default(0)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  status        Int      @default(0)
+  tab           Tab      @relation(fields: [tabId], references: [id])
   Course        Course[]
+
+  @@index([tabId], map: "Category_tabId_fkey")
 }
 
 model Course {
-  id               Int      @id @default(autoincrement())
+  id               Int        @id @default(autoincrement())
   name             String
   courseImage      String
   coursethumbImage String
@@ -90,26 +96,43 @@ model Course {
   button_name      String
   button_link      String
   categoryId       Int
-  category         Category @relation(fields: [categoryId], references: [id])
-  tariffs          String   @db.Text
-  planning         Planning[] 
   orderby          Int
-  slug             String   @unique @default(cuid())
-  status           Int      @default(0)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  slug             String     @unique @default(cuid())
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  status           Int        @default(0)
+  tariffs          String     @db.Text
+  category         Category   @relation(fields: [categoryId], references: [id])
+  planning         Planning[]
+
+  @@index([categoryId], map: "Course_categoryId_fkey")
+}
+
+model CoursePurchase {
+  id        Int      @id @default(autoincrement())
+  name      String
+  dob       DateTime
+  phone     String
+  city      String
+  activity  String
+  slug      String   @unique @default(cuid())
+  status    Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Planning {
-  id              Int           @id @default(autoincrement())
-  plan_title      String
-  orderby         Int
-  course_id       Int
-  course          Course        @relation(fields: [course_id], references: [id])
-  slug            String        @unique @default(cuid())
-  status          Int           @default(0)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  id         Int      @id @default(autoincrement())
+  plan_title String
+  orderby    Int
+  course_id  Int
+  slug       String   @unique @default(cuid())
+  status     Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  course     Course   @relation(fields: [course_id], references: [id])
+
+  @@index([course_id], map: "Planning_course_id_fkey")
 }
 
 model Aboutus {
@@ -121,9 +144,9 @@ model Aboutus {
   description String   @db.Text
   button      String
   slug        String   @unique @default(cuid())
-  status      Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  status      Int      @default(0)
 }
 
 model CallToAction {
@@ -134,9 +157,9 @@ model CallToAction {
   backgroundImage String
   buttonName      String   @db.VarChar(255)
   slug            String   @unique @default(cuid())
-  status          Int      @default(0)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  status          Int      @default(0)
 }
 
 model HomeAdvantage {
@@ -144,11 +167,11 @@ model HomeAdvantage {
   name          String
   image         String          @db.VarChar(255)
   description   String          @db.Text
-  advantageList AdvantageList[]
   slug          String          @unique @default(cuid())
-  status        Int             @default(0)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
+  status        Int             @default(0)
+  advantageList AdvantageList[]
 }
 
 model AdvantageList {
@@ -156,11 +179,13 @@ model AdvantageList {
   name            String
   description     String        @db.Text
   homeadvantageId Int
-  homeadvantage   HomeAdvantage @relation(fields: [homeadvantageId], references: [id])
   slug            String        @unique @default(cuid())
-  status          Int           @default(0)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+  status          Int           @default(0)
+  homeadvantage   HomeAdvantage @relation(fields: [homeadvantageId], references: [id])
+
+  @@index([homeadvantageId], map: "AdvantageList_homeadvantageId_fkey")
 }
 
 model CourseCount {
@@ -169,9 +194,9 @@ model CourseCount {
   count      String
   icon_image String
   slug       String   @unique @default(cuid())
-  status     Int      @default(0)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  status     Int      @default(0)
 }
 
 model InstructorSection {
@@ -180,8 +205,8 @@ model InstructorSection {
   description String      @db.Text
   slug        String      @unique @default(cuid())
   createdAt   DateTime    @default(now())
-  status      Int         @default(0)
   updatedAt   DateTime    @updatedAt
+  status      Int         @default(0)
   Instructor  Instructor[]
 }
 
@@ -190,16 +215,16 @@ model Instructor {
   name                String
   instructorImage     String
   instructorSectionId Int               
-  instructorSection   InstructorSection @relation(fields: [instructorSectionId], references: [id])
   position            String
   email               String
   phone               String
   address             String
   description         String
   slug                String            @unique @default(cuid())
-  status              Int               @default(0)
   createdAt           DateTime          @default(now())
   updatedAt           DateTime          @updatedAt
+  status              Int               @default(0)
+  instructorSection   InstructorSection @relation(fields: [instructorSectionId], references: [id])
 }
 
 model NewsLetter {
@@ -207,112 +232,111 @@ model NewsLetter {
   name        String
   description String   @db.Text
   slug        String   @unique @default(cuid())
-  status      Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  status      Int      @default(0)
 }
-
 
 model History {
-  id               Int      @id @default(autoincrement())
-  title            String
-  description      String   @db.Text
-  image_one        String
-  image_two        String
-  image_three      String   
-  status           Int      @default(0)
-  slug             String   @unique @default(cuid())
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-}
-
-model HistoryAccordian {
-  id           Int      @id @default(autoincrement())
-  title        String
-  description  String   @db.Text
-  slug         String   @unique @default(cuid())
-  orderby      Int
-  status       Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-}
-
-
-model GeneralSetting {
-  id           Int      @id @default(autoincrement())
-  logo         String
-  emailaddress String   
-  phonenumber  String   
-  address      String   
-  facebook     String   
-  instagram    String   
-  skype        String   
-  youtube      String   
-  pinterest    String   
-  twitter      String   
-  slug         String   @unique @default(cuid())
-  status       Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-}
-
-
-model Subscription {
-  id           Int      @id @default(autoincrement())
-  email        String  
-  slug         String   @unique @default(cuid())
-  status       Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-}
-
-model ContactUs {
-  id           Int      @id @default(autoincrement())
-  name         String  
-  email        String  
-  phonenumber  String  
-  subject      String  
-  message      String  
-  slug         String   @unique @default(cuid())
-  status       Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-}
-
-model Employee {
-  id                        Int      @id @default(autoincrement())
-  name                      String  
-  image                     String  
-  description               String   @db.Text
-  planing_description       String   @db.Text
-  partenaires_image         PartenairesImage [] 
-  orderby                   Int
-  slug                      String   @unique @default(cuid())
-  status                    Int      @default(0)
-  createdAt                 DateTime @default(now())
-  updatedAt                 DateTime @updatedAt
-}
-
-model PartenairesImage {
   id          Int      @id @default(autoincrement())
-  image       String
-  orderby     Int
-  url         String
-  employeeId  Int
-  employee    Employee @relation(fields: [employeeId], references: [id])
+  title       String
+  description String   @db.Text
+  image_one   String
+  image_two   String
+  image_three String
+  status      Int      @default(0)
   slug        String   @unique @default(cuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
-model News {
+model HistoryAccordian {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  slug        String   @unique @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orderby     Int
+  status      Int      @default(0)
+}
+
+model GeneralSetting {
   id           Int      @id @default(autoincrement())
-  image        String
-  title        String   
-  description  String   @db.Text
-  orderby      Int   
+  logo         String
+  emailaddress String
+  phonenumber  String
+  address      String
+  facebook     String
+  instagram    String
+  skype        String
+  youtube      String
+  pinterest    String
+  twitter      String
   slug         String   @unique @default(cuid())
   status       Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model Subscription {
+  id        Int      @id @default(autoincrement())
+  email     String
+  slug      String   @unique @default(cuid())
+  status    Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContactUs {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+  phonenumber String
+  subject     String
+  message     String
+  slug        String   @unique @default(cuid())
+  status      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Employee {
+  id                  Int                @id @default(autoincrement())
+  name                String
+  image               String
+  description         String             @db.Text
+  planing_description String             @db.Text
+  orderby             Int
+  slug                String             @unique @default(cuid())
+  status              Int                @default(0)
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  partenaires_image   PartenairesImage[]
+}
+
+model PartenairesImage {
+  id         Int      @id @default(autoincrement())
+  image      String
+  orderby    Int
+  url        String
+  employeeId Int
+  slug       String   @unique @default(cuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  employee   Employee @relation(fields: [employeeId], references: [id])
+
+  @@index([employeeId], map: "PartenairesImage_employeeId_fkey")
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  image       String
+  title       String
+  description String   @db.Text
+  orderby     Int
+  slug        String   @unique @default(cuid())
+  status      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

@@ -1,10 +1,8 @@
-import { S3Client, PutObjectCommand, PutObjectCommandInput } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, PutObjectCommandInput, ListObjectsCommand, DeleteObjectsCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import Sharp from "sharp";
 import { ImageExtensions } from "@asif/services";
 import { v4 as uuidv4 } from 'uuid';
 
-
-// Amazon SES configuration
 const config = {
   region: process.env.AWS_S3_REGION!,
   credentials: {
@@ -12,9 +10,81 @@ const config = {
     secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY!
   }
 };
-//console.log("🚀 ~ config:", config)
 
 const s3Client = new S3Client(config);
+
+export async function createFolder(foldername: string): Promise<any> {
+  try {
+    const bucketName = process.env.AWS_S3_BUCKET_NAME;
+    const folderParams = {
+      Bucket: bucketName,
+      Key: `${foldername}/`,
+    };
+
+    const folderCommand = new PutObjectCommand(folderParams);
+    await s3Client.send(folderCommand);
+
+    const fileParams = {
+      Bucket: bucketName,
+      Key: `${foldername}/empty.txt`,
+      Body: "",
+    };
+
+    const fileCommand = new PutObjectCommand(fileParams);
+    await s3Client.send(fileCommand);
+
+    return { message: "Success" };
+  } catch (error) {
+    return { message: error.message };
+  }
+}
+
+export async function deleteFolder(foldername: string): Promise<any> {
+  try {
+    const bucketName = process.env.AWS_S3_BUCKET_NAME;
+    const listParams = {
+      Bucket: bucketName,
+      Prefix: `${foldername}/`,
+    };
+
+    const listCommand = new ListObjectsCommand(listParams);
+    const listedObjects = await s3Client.send(listCommand);
+
+    if (listedObjects.Contents && listedObjects.Contents.length > 0) {
+      const deleteParams = {
+        Bucket: bucketName,
+        Delete: {
+          Objects: listedObjects.Contents.map(object => ({ Key: object.Key })),
+        },
+      };
+
+      const deleteCommand = new DeleteObjectsCommand(deleteParams);
+      await s3Client.send(deleteCommand);
+    }
+
+    return { message: "Folder deleted successfully" };
+  } catch (error) {
+    return { message: error.message };
+  }
+}
+
+export async function deleteFile(fileKey: string): Promise<any> {
+  try {
+    const bucketName = process.env.AWS_S3_BUCKET_NAME;
+
+    const deleteParams = {
+      Bucket: bucketName,
+      Key: fileKey,
+    };
+
+    const deleteCommand = new DeleteObjectCommand(deleteParams);
+    await s3Client.send(deleteCommand);
+
+    return { message: "File deleted successfully" };
+  } catch (error) {
+    return { message: error.message };
+  }
+}
 
 export async function upload(file: string, fileName: string, foldername: string): Promise<any> {
   try {
