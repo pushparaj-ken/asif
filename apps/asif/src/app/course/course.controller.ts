@@ -17,6 +17,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.courseImage = image.Location;
+      } else {
+        data.courseImage = data.courseImage;
       }
 
       if (files.coursethumbImage) {
@@ -24,6 +26,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.coursethumbImage = image.Location;
+      } else {
+        data.coursethumbImage = data.coursethumbImage;
       }
       const Create = await prisma.course.create({ data: data })
       res.status(200).json({
@@ -50,6 +54,8 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.courseImage = image.Location;
+        } else {
+          data.courseImage = data.courseImage;
         }
 
         if (files.coursethumbImage) {
@@ -57,6 +63,8 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.coursethumbImage = image.Location;
+        } else {
+          data.coursethumbImage = data.coursethumbImage;
         }
         const Update = await prisma.course.update({ data, where })
         res.status(200).json({

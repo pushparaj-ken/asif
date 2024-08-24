@@ -15,6 +15,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.image = image.Location;
+      } else {
+        data.image = data.image;
       }
       data.orderby = parseInt(data.orderby);
       const Create = await prisma.news.create({ data: data })
@@ -40,6 +42,8 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.image = image.Location;
+        } else {
+          data.image = data.image;
         }
         data.orderby = parseInt(data.orderby);
         const Update = await prisma.news.update({ data, where })

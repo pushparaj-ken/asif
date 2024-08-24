@@ -15,6 +15,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.image_one = image.Location;
+      } else {
+        data.image_one = data.image_one;
       }
 
       if (files.image_two) {
@@ -22,6 +24,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.image_two = image.Location;
+      } else {
+        data.image_two = data.image_two;
       }
 
       if (files.image_three) {
@@ -29,6 +33,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.image_three = image.Location;
+      } else {
+        data.image_three = data.image_three;
       }
 
       const Create = await prisma.history.create({ data: data })
@@ -54,6 +60,8 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.image_one = image.Location;
+        } else {
+          data.image_one = data.image_one;
         }
 
         if (files.image_two) {
@@ -61,6 +69,8 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.image_two = image.Location;
+        } else {
+          data.image_two = data.image_two;
         }
 
         if (files.image_three) {
@@ -68,6 +78,8 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.image_three = image.Location;
+        } else {
+          data.image_three = data.image_three;
         }
         const Update = await prisma.history.update({ data, where })
         res.status(200).json({

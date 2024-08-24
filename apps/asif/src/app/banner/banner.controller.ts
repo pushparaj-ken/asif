@@ -63,7 +63,7 @@ export class Controller {
 
   async Details(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy , order} = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy, order } = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug
@@ -107,6 +107,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         Datafile.url = image.Location;
+      } else {
+        Datafile.image = data.image;
       }
       const Create = await prisma.image.create({ data: Datafile })
       res.status(200).json({
@@ -132,6 +134,8 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           Datafile.url = image.Location;
+        } else {
+          Datafile.image = data.image;
         }
         const where = { slug: params.id }
         const Update = await prisma.image.update({ data: Datafile, where })

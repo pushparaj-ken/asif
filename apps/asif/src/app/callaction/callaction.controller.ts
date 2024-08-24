@@ -15,6 +15,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.backgroundImage = image.Location;
+      } else {
+        data.backgroundImage = data.backgroundImage;
       }
 
 
@@ -41,8 +43,10 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.backgroundImage = image.Location;
+        } else {
+          data.backgroundImage = data.backgroundImage;
         }
-  
+
         const Update = await prisma.callToAction.update({ data, where })
         res.status(200).json({
           success: true,
@@ -80,7 +84,7 @@ export class Controller {
 
   async Details(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy ,tabId,order} = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy, tabId, order } = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug

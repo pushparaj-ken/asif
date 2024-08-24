@@ -62,6 +62,12 @@
  *         youtubelink:
  *           type: string
  *           example: link
+ *         count:
+ *           type: string
+ *           example: count
+ *         count_title:
+ *           type: string
+ *           example: count_title
  */
 
 /**

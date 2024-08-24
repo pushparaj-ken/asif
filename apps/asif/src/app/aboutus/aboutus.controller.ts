@@ -15,6 +15,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.imageOne = image.Location;
+      } else {
+        data.imageOne = data.imageOne;
       }
 
       if (files.imageTwo) {
@@ -22,6 +24,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.imageTwo = image.Location;
+      } else {
+        data.imageOne = data.imageOne;
       }
 
       if (files.imageThree) {
@@ -29,6 +33,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.imageThree = image.Location;
+      } else {
+        data.imageThree = data.imageThree;
       }
 
       const Create = await prisma.aboutus.create({ data: data })
@@ -54,20 +60,26 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.imageOne = image.Location;
+        } else {
+          data.imageOne = data.imageOne;
         }
-  
+
         if (files.imageTwo) {
           let { buffer, originalname } = files.imageTwo[0];
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.imageTwo = image.Location;
+        } else {
+          data.imageTwo = data.imageTwo;
         }
-  
+
         if (files.imageThree) {
           let { buffer, originalname } = files.imageThree[0];
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.imageThree = image.Location;
+        } else {
+          data.imageThree = data.imageThree;
         }
         const Update = await prisma.aboutus.update({ data, where })
         res.status(200).json({
@@ -106,7 +118,7 @@ export class Controller {
 
   async Details(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy ,tabId,order} = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy, tabId, order } = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug

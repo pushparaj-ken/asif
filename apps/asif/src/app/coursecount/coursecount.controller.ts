@@ -15,6 +15,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.icon_image = image.Location;
+      } else {
+        data.icon_image = data.icon_image;
       }
 
 
@@ -41,6 +43,8 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.icon_image = image.Location;
+        } else {
+          data.icon_image = data.icon_image;
         }
 
         const Update = await prisma.courseCount.update({ data, where })

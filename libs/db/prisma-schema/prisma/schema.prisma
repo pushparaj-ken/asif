@@ -40,6 +40,8 @@ model Banner {
   shortDescription String   @db.VarChar(255)
   buttonName       String
   link             String
+  count            String
+  count_title      String
   slug             String   @unique @default(cuid())
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt

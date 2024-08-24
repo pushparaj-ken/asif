@@ -17,6 +17,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.categoryImage = image.Location;
+      } else {
+        data.categoryImage = data.categoryImage;
       }
       const Create = await prisma.category.create({ data: data })
       res.status(200).json({
@@ -43,6 +45,8 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.categoryImage = image.Location;
+        } else {
+          data.categoryImage = data.categoryImage;
         }
         const Update = await prisma.category.update({ data, where })
         res.status(200).json({
@@ -81,7 +85,7 @@ export class Controller {
 
   async Details(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy ,tabId,order} = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy, tabId, order } = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug

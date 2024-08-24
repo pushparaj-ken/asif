@@ -15,6 +15,8 @@ export class Controller {
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
         data.image = image.Location;
+      } else {
+        data.image = data.image;
       }
       data.orderby = parseInt(data.orderby);
       const Create = await prisma.employee.create({ data: data })
@@ -40,6 +42,8 @@ export class Controller {
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
           data.image = image.Location;
+        } else {
+          data.image = data.image;
         }
         data.orderby = parseInt(data.orderby);
         const Upadte = await prisma.employee.update({ data, where })
@@ -122,6 +126,8 @@ export class Controller {
         let { buffer, originalname } = files.image[0];
         let image = await upload(buffer, originalname, foldername);
         data.image = image.Location;
+      } else {
+        data.image = data.image;
       }
       data.orderby = parseInt(data.orderby);
       const Create = await prisma.partenairesImage.create({ data: data })
@@ -147,6 +153,8 @@ export class Controller {
           let { buffer, originalname } = files.image[0];
           let image = await upload(buffer, originalname, foldername);
           data.image = image.Location;
+        } else {
+          data.image = data.image;
         }
         data.orderby = parseInt(data.orderby);
         const where = { slug: params.id }
