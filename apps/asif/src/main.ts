@@ -28,6 +28,9 @@ import EmployeeAdmin from "./app/employee/employee.routes";
 import FilemanagerAdmin from "./app/filemanager/filemanager.routes";
 import NewsAdmin from "./app/news/news.routes";
 import CoursePurchaseAdmin from "./app/coursepurchase/coursepurchase.routes";
+import GalleryAdmin from "./app/gallery/gallery.routes";
+import CategoryGalleryAdmin from "./app/gallery-category/gallery-category.routes";
+import SubCategoryGalleryAdmin from "./app/gallery-subcategory/gallery-subcategory.routes";
 
 
 import dotenv from 'dotenv';
@@ -77,6 +80,9 @@ app.use('/api/admin/employee', EmployeeAdmin)
 app.use('/api/admin/filemanager', FilemanagerAdmin)
 app.use('/api/admin/news', NewsAdmin)
 app.use('/api/admin/cpurchase', CoursePurchaseAdmin)
+app.use('/api/admin/gallery', GalleryAdmin)
+app.use('/api/admin/gallery/category', CategoryGalleryAdmin)
+app.use('/api/admin/gallery/subcategory', SubCategoryGalleryAdmin)
 
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {

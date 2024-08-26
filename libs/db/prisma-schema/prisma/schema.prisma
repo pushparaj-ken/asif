@@ -123,6 +123,44 @@ model CoursePurchase {
   updatedAt DateTime @updatedAt
 }
 
+model GalleryCategory {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  orderby            Int
+  slug               String               @unique @default(cuid())
+  status             Int                  @default(0)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  gallerysubcategory GallerySubcategory[]
+}
+
+model GallerySubcategory {
+  id              Int             @id @default(autoincrement())
+  name            String
+  categoryId      Int
+  orderby         Int
+  slug            String          @unique @default(cuid())
+  status          Int             @default(0)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  gallerycategory GalleryCategory @relation(fields: [categoryId], references: [id])
+  gallery         Gallery[]
+}
+
+model Gallery {
+  id                 Int                @id @default(autoincrement())
+  name               String
+  url                String
+  galleryType        String
+  subcategoryId      Int
+  orderby            Int
+  slug               String             @unique @default(cuid())
+  status             Int                @default(0)
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  gallerysubcategory GallerySubcategory @relation(fields: [subcategoryId], references: [id])
+}
+
 model Planning {
   id         Int      @id @default(autoincrement())
   plan_title String
@@ -202,13 +240,13 @@ model CourseCount {
 }
 
 model InstructorSection {
-  id          Int         @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   name        String
-  description String      @db.Text
-  slug        String      @unique @default(cuid())
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  status      Int         @default(0)
+  description String       @db.Text
+  slug        String       @unique @default(cuid())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  status      Int          @default(0)
   Instructor  Instructor[]
 }
 
@@ -216,7 +254,7 @@ model Instructor {
   id                  Int               @id @default(autoincrement())
   name                String
   instructorImage     String
-  instructorSectionId Int               
+  instructorSectionId Int
   position            String
   email               String
   phone               String
