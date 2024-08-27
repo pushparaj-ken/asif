@@ -83,6 +83,7 @@ export class Controller {
         take: take ? parseInt(take) : undefined,
         cursor: cursor ? { id: parseInt(cursor) } : undefined,
         where,
+        include: { gallerysubcategory: true },
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
