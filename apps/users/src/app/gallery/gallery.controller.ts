@@ -48,7 +48,7 @@ export class GallerytController {
 
   async GalleryCategory(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy, tabId, order } = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy, galleryType, order } = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug
@@ -56,8 +56,8 @@ export class GallerytController {
       if (name) {
         where.name = { contains: name.toString() }
       }
-      if (tabId) {
-        where.tabId = parseInt(tabId)
+      if (galleryType) {
+        where.galleryType = galleryType
       }
       const List = await prisma.galleryCategory.findMany({
         skip: skip ? parseInt(skip) : undefined,

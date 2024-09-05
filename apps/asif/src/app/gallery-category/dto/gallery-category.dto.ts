@@ -5,6 +5,9 @@ export class CreateDto {
   @IsNotEmpty()
   name: string;
 
+  @IsString()
+  galleryType: string;
+
   @IsInt()
   orderby: number;
 

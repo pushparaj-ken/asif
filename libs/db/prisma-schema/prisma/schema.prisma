@@ -126,6 +126,7 @@ model CoursePurchase {
 model GalleryCategory {
   id                 Int                  @id @default(autoincrement())
   name               String
+  galleryType        String
   orderby            Int
   slug               String               @unique @default(cuid())
   status             Int                  @default(0)

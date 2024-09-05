@@ -60,6 +60,12 @@
  *           type: string
  *         required: false
  *         description: Filter by Name
+ *       - in: query
+ *         name: galleryType
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by galleryType
  *     responses:
  *       200:
  *         description: Success
