@@ -100,17 +100,17 @@ export class Controller {
     const files = req.files;
 
     try {
-      let Datafile: any = {}
-      Datafile.bannerId = parseInt(data.bannerId);
       if (files.image) {
         let { buffer, originalname } = files.image[0];
         let image = await upload(buffer, originalname, foldername);
         console.log(image.Location);
-        Datafile.url = image.Location;
+        data.url = image.Location;
       } else {
-        Datafile.image = data.image;
+        data.url = data.image;
       }
-      const Create = await prisma.image.create({ data: Datafile })
+      delete data.image
+      data.bannerId = parseInt(data.bannerId);
+      const Create = await prisma.image.create({ data: data })
       res.status(200).json({
         success: true,
         code: 200,
@@ -127,18 +127,17 @@ export class Controller {
     const files = req.files;
     try {
       if (params.id !== '' && params.id !== null && params.id !== undefined) {
-        let Datafile: any = {}
-        Datafile.bannerId = parseInt(data.bannerId);
+        data.bannerId = parseInt(data.bannerId);
         if (files.image) {
           let { buffer, originalname } = files.image[0];
           let image = await upload(buffer, originalname, foldername);
           console.log(image.Location);
-          Datafile.url = image.Location;
+          data.url = image.Location;
         } else {
-          Datafile.image = data.image;
+          data.url = data.image;
         }
         const where = { slug: params.id }
-        const Update = await prisma.image.update({ data: Datafile, where })
+        const Update = await prisma.image.update({ data: data, where })
         res.status(200).json({
           success: true,
           code: 200,
