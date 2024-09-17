@@ -130,6 +130,36 @@
 
 /**
  * @swagger
+ * /api/users/index/course-button:
+ *   get:
+ *     summary: List Button Course
+ *     tags: [Index]
+ *     parameters:
+ *       - in: query
+ *         name: slug
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by slug
+ *       - in: query
+ *         name: course_id
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by course_id
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by Name
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+
+/**
+ * @swagger
  * /api/users/index/aboutus:
  *   get:
  *     summary: List AboutUs
@@ -423,6 +453,36 @@
  *           type: string
  *         required: false
  *         description: Filter by slug
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by name
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+
+/**
+ * @swagger
+ * /api/users/index/custom-page:
+ *   get:
+ *     summary: List 
+ *     tags: [Index]
+ *     parameters:
+ *       - in: query
+ *         name: slug
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by slug
+ *       - in: query
+ *         name: link
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by link
  *       - in: query
  *         name: name
  *         schema:

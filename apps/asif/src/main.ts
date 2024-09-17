@@ -31,6 +31,8 @@ import CoursePurchaseAdmin from "./app/coursepurchase/coursepurchase.routes";
 import GalleryAdmin from "./app/gallery/gallery.routes";
 import CategoryGalleryAdmin from "./app/gallery-category/gallery-category.routes";
 import SubCategoryGalleryAdmin from "./app/gallery-subcategory/gallery-subcategory.routes";
+import CourseButtonAdmin from "./app/course-button/course-button.routes";
+import CustomPageAdmin from "./app/custom-page/custom-page.routes";
 
 
 import dotenv from 'dotenv';
@@ -83,6 +85,8 @@ app.use('/api/admin/cpurchase', CoursePurchaseAdmin)
 app.use('/api/admin/gallery', GalleryAdmin)
 app.use('/api/admin/gallery/category', CategoryGalleryAdmin)
 app.use('/api/admin/gallery/subcategory', SubCategoryGalleryAdmin)
+app.use('/api/admin/course/course-button', CourseButtonAdmin)
+app.use('/api/admin/custom-page', CustomPageAdmin)
 
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {

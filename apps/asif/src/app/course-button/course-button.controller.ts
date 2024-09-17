@@ -6,7 +6,7 @@ export class Controller {
   async Add(req: any, res: any, next: any) {
     const data = req.body;
     try {
-      const Create = await prisma.tab.create({ data: data })
+      const Create = await prisma.buttonCourse.create({ data: data })
       res.status(200).json({
         success: true,
         code: 200,
@@ -23,14 +23,14 @@ export class Controller {
     try {
       if (params.id !== '' && params.id !== null && params.id !== undefined) {
         const where = { slug: params.id }
-        const Update = await prisma.tab.update({ data, where })
+        const Update = await prisma.buttonCourse.update({ data, where })
         res.status(200).json({
           success: true,
           code: 200,
           status: "Data Update Success",
         });
       } else {
-        return next(new Error('Id is Required to Update Role'))
+        return next(new Error('Id is Required to Update '))
       }
 
     } catch (error) {
@@ -44,14 +44,14 @@ export class Controller {
     try {
       if (params.id !== '' && params.id !== null && params.id !== undefined) {
         const where = { slug: params.id }
-        const Detele = await prisma.tab.delete({ where })
+        const Detele = await prisma.buttonCourse.delete({ where })
         res.status(200).json({
           success: true,
           code: 200,
           status: "Data Deleted Success",
         });
       } else {
-        return next(new Error('Id is Required to Delete Role'))
+        return next(new Error('Id is Required to Delete '))
       }
     } catch (error) {
       next(error)
@@ -60,7 +60,7 @@ export class Controller {
 
   async Details(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy, order } = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy, order, course_id } = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug
@@ -68,7 +68,10 @@ export class Controller {
       if (name) {
         where.name = { contains: name.toString() }
       }
-      const List = await prisma.tab.findMany({
+      if (course_id) {
+        where.course_id = parseInt(course_id)
+      }
+      const List = await prisma.buttonCourse.findMany({
         skip: skip ? parseInt(skip) : undefined,
         take: take ? parseInt(take) : undefined,
         cursor: cursor ? { id: parseInt(cursor) } : undefined,

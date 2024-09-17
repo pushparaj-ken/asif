@@ -1,8 +1,8 @@
 /**
  * @swagger
  * tags:
- *   name: Category
- *   description: Category Management
+ *   name: CustomPage
+ *   description: CustomPage Management
  */
 
 
@@ -10,36 +10,36 @@
  * @swagger
  * components:
  *   schemas:
- *     createCategory:
+ *     createCustomPage:
  *       type: object
  *       required:
- *         - name
- *         - categoryImage
- *         - orderby
+ *         - title
+ *         - link
+ *         - image
  *       properties:
- *         name:
+ *         title:
  *           type: string
  *           example: title
- *         categoryImage:
+ *         link:
  *           type: string
- *           format: binary
- *         orderby:
- *           type: number
- *           example: 1
+ *           example: description
+ *         image:
+ *           type: string
+ *           example: button
  */
 
 /**
  * @swagger
- * /api/admin/category/add:
+ * /api/admin/custom-page/add:
  *   post:
  *     summary: Add 
- *     tags: [Category]
+ *     tags: [CustomPage]
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/createCategory'
+ *             $ref: '#/components/schemas/createCustomPage'
  *     responses:
  *       200:
  *         description: Success
@@ -47,23 +47,23 @@
 
 /**
  * @swagger
- * /api/admin/category/update/{id}:
+ * /api/admin/custom-page/update/{id}:
  *   put:
  *     summary: Update 
- *     tags: [Category]
+ *     tags: [CustomPage]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: Category Slug
+ *         description: CustomPage Slug
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/createCategory'
+ *             $ref: '#/components/schemas/createCustomPage'
  *     responses:
  *       200:
  *         description: Success
@@ -72,17 +72,17 @@
 
 /**
  * @swagger
- * /api/admin/category/delete/{id}:
+ * /api/admin/custom-page/delete/{id}:
  *   delete:
  *     summary: Delete 
- *     tags: [Category]
+ *     tags: [CustomPage]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: Category Slug
+ *         description: CustomPage Slug
  *     responses:
  *       200:
  *         description: Success
@@ -90,10 +90,10 @@
 
 /**
  * @swagger
- * /api/admin/category/list:
+ * /api/admin/custom-page/list:
  *   get:
  *     summary: List 
- *     tags: [Category]
+ *     tags: [CustomPage]
  *     parameters:
  *       - in: query
  *         name: slug
@@ -101,6 +101,12 @@
  *           type: string
  *         required: false
  *         description: Filter by slug
+ *       - in: query
+ *         name: link
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by link
  *       - in: query
  *         name: name
  *         schema:

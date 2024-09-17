@@ -55,7 +55,6 @@ export class IndexController {
         cursor: cursor ? { id: parseInt(cursor) } : undefined,
         where,
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
-        include: { category: true }
       });
       if (List.length > 0) {
         res.status(200).json({
@@ -92,7 +91,6 @@ export class IndexController {
         cursor: cursor ? { id: parseInt(cursor) } : undefined,
         where,
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
-        include: { tab: true }
       });
       if (List.length > 0) {
         res.status(200).json({
@@ -129,7 +127,43 @@ export class IndexController {
         cursor: cursor ? { id: parseInt(cursor) } : undefined,
         where,
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
-        include: { category: true, planning: true }
+        include: { category: true, planning: true, buttonCourse: true }
+      });
+      if (List.length > 0) {
+        res.status(200).json({
+          success: true,
+          code: 200,
+          status: "Data Reterived Success",
+          Data: List
+        });
+      } else {
+        return next(new Error('No Data Found'))
+      }
+
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async CourseButton(req: any, res: any, next: any) {
+    try {
+      const { id, slug, name, skip, take, cursor, orderBy, order, course_id } = req.query;
+      let where: any = {}
+      if (slug) {
+        where.slug = slug
+      }
+      if (name) {
+        where.name = { contains: name.toString() }
+      }
+      if (course_id) {
+        where.course_id = parseInt(course_id)
+      }
+      const List = await prisma.buttonCourse.findMany({
+        skip: skip ? parseInt(skip) : undefined,
+        take: take ? parseInt(take) : undefined,
+        cursor: cursor ? { id: parseInt(cursor) } : undefined,
+        where,
+        orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
         res.status(200).json({
@@ -572,6 +606,42 @@ export class IndexController {
         where.tabId = parseInt(tabId)
       }
       const List = await prisma.news.findMany({
+        skip: skip ? parseInt(skip) : undefined,
+        take: take ? parseInt(take) : undefined,
+        cursor: cursor ? { id: parseInt(cursor) } : undefined,
+        where,
+        orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
+      });
+      if (List.length > 0) {
+        res.status(200).json({
+          success: true,
+          code: 200,
+          status: "Data Reterived Success",
+          Data: List
+        });
+      } else {
+        return next(new Error('No Data Found'))
+      }
+
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async CustomPage(req: any, res: any, next: any) {
+    try {
+      const { id, slug, name, skip, take, cursor, orderBy, link, order } = req.query;
+      let where: any = {}
+      if (slug) {
+        where.slug = slug
+      }
+      if (name) {
+        where.name = { contains: name.toString() }
+      }
+      if (link) {
+        where.link = link
+      }
+      const List = await prisma.customPage.findMany({
         skip: skip ? parseInt(skip) : undefined,
         take: take ? parseInt(take) : undefined,
         cursor: cursor ? { id: parseInt(cursor) } : undefined,

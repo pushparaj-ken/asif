@@ -36,5 +36,9 @@ router.get('/employee', IndexController.Employee);
 
 router.get('/news', IndexController.NewsDetails);
 
+router.get('/course-button', IndexController.CourseButton);
+
+router.get('/custom-page', IndexController.CustomPage);
+
 export default router;
 

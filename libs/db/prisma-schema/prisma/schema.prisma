@@ -69,23 +69,18 @@ model Tab {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   status    Int        @default(0)
-  category  Category[]
 }
 
 model Category {
   id            Int      @id @default(autoincrement())
   name          String
   categoryImage String
-  tabId         Int
   orderby       Int
   slug          String   @unique @default(cuid())
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   status        Int      @default(0)
-  tab           Tab      @relation(fields: [tabId], references: [id])
   Course        Course[]
-
-  @@index([tabId], map: "Category_tabId_fkey")
 }
 
 model Course {
@@ -106,8 +101,22 @@ model Course {
   tariffs          String     @db.Text
   category         Category   @relation(fields: [categoryId], references: [id])
   planning         Planning[]
+  buttonCourse     ButtonCourse[]
 
   @@index([categoryId], map: "Course_categoryId_fkey")
+}
+
+model ButtonCourse {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  orderby     Int
+  course_id   Int
+  slug        String   @unique @default(cuid())
+  status      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  course      Course   @relation(fields: [course_id], references: [id])
 }
 
 model CoursePurchase {
@@ -184,6 +193,17 @@ model Aboutus {
   imageThree  String
   description String   @db.Text
   button      String
+  slug        String   @unique @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  status      Int      @default(0)
+}
+
+model CustomPage {
+  id          Int      @id @default(autoincrement())
+  title       String
+  image       String
+  link        String
   slug        String   @unique @default(cuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

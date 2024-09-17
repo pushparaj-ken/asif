@@ -7,10 +7,9 @@ export class CreateDto {
   name: string;
 
   @IsNotEmpty()
-  categoryImage: string;
+  image: string;
 
   @IsNotEmpty()
-  @IsInt()
-  orderby: number;
+  link: string;
 
 }

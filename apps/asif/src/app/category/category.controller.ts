@@ -85,7 +85,7 @@ export class Controller {
 
   async Details(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy, tabId, order } = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy, order } = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug
@@ -93,16 +93,15 @@ export class Controller {
       if (name) {
         where.name = { contains: name.toString() }
       }
-      if (tabId) {
-        where.tabId = parseInt(tabId)
-      }
+      // if (tabId) {
+      //   where.tabId = parseInt(tabId)
+      // }
       const List = await prisma.category.findMany({
         skip: skip ? parseInt(skip) : undefined,
         take: take ? parseInt(take) : undefined,
         cursor: cursor ? { id: parseInt(cursor) } : undefined,
         where,
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
-        include: { tab: true }
       });
       if (List.length > 0) {
         res.status(200).json({

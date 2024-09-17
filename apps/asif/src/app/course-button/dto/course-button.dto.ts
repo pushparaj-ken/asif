@@ -2,15 +2,20 @@ import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateDto {
 
-  @IsNotEmpty()
   @IsString()
-  name: string;
-
   @IsNotEmpty()
-  categoryImage: string;
+  title: string;
 
+  @IsString()
   @IsNotEmpty()
+  description: string;
+
   @IsInt()
+  @IsNotEmpty()
+  course_id: number;
+
+  @IsInt()
+  @IsNotEmpty()
   orderby: number;
 
 }
