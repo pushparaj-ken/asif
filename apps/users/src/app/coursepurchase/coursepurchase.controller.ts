@@ -1,6 +1,8 @@
 import { PrismaService, Prisma } from '@asif/prisma-client';
 const prisma = new PrismaService();
 import _ from 'lodash';
+import { APIResponseService } from '@asif/services'
+const responseService = new APIResponseService();
 
 export class Controller {
   async Add(req: any, res: any, next: any) {
@@ -10,11 +12,7 @@ export class Controller {
         data.dob = new Date(data.dob);
       }
       const Create = await prisma.coursePurchase.create({ data: data })
-      res.status(200).json({
-        success: true,
-        code: 200,
-        status: "Data Saved Success",
-      });
+      return await responseService.apiSuccessResponse(res, null);
     } catch (error) {
       next(error);
     }

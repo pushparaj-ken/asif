@@ -1,17 +1,15 @@
 import { PrismaService, Prisma } from '@asif/prisma-client';
 const prisma = new PrismaService();
 import _ from 'lodash';
+import { APIResponseService } from '@asif/services'
+const responseService = new APIResponseService();
 
 export class Controller {
   async Add(req: any, res: any, next: any) {
     const data = req.body;
     try {
       const Create = await prisma.tab.create({ data: data })
-      res.status(200).json({
-        success: true,
-        code: 200,
-        status: "Data Saved Success",
-      });
+      return await responseService.apiSuccessResponse(res, null);
     } catch (error) {
       next(error);
     }
@@ -24,13 +22,9 @@ export class Controller {
       if (params.id !== '' && params.id !== null && params.id !== undefined) {
         const where = { slug: params.id }
         const Update = await prisma.tab.update({ data, where })
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Update Success",
-        });
+        return await responseService.apiSuccessResponse(res, null);
       } else {
-        return next(new Error('Id is Required to Update Role'))
+        return await responseService.apiFailResponse(res, 'Id is Required');
       }
 
     } catch (error) {
@@ -45,13 +39,9 @@ export class Controller {
       if (params.id !== '' && params.id !== null && params.id !== undefined) {
         const where = { slug: params.id }
         const Detele = await prisma.tab.delete({ where })
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Deleted Success",
-        });
+        return await responseService.apiSuccessResponse(res, null);
       } else {
-        return next(new Error('Id is Required to Delete Role'))
+        return await responseService.apiFailResponse(res, 'Id is Required');
       }
     } catch (error) {
       next(error)
@@ -76,14 +66,9 @@ export class Controller {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {

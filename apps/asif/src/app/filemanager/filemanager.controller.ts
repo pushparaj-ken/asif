@@ -3,6 +3,8 @@ const prisma = new PrismaService();
 import { ListObjectsV2Command } from "@aws-sdk/client-s3";
 import { s3, processObjects } from "@asif/services";
 import { upload, createFolder, deleteFolder, deleteFile } from "@asif/services";
+import { APIResponseService } from '@asif/services'
+const responseService = new APIResponseService();
 
 export class Controller {
 
@@ -34,12 +36,7 @@ export class Controller {
 
       const structuredData = processObjects(objects);
 
-      res.status(200).json({
-        success: true,
-        code: 200,
-        status: "Data Update Success",
-        data: structuredData
-      });
+      return await responseService.apiSuccessResponse(res, null);
     } catch (error) {
       console.error('Error listing objects:', error);
       next(error);
@@ -52,13 +49,9 @@ export class Controller {
       if (data.foldername) {
         const foldername = data.foldername;
         let folder = await createFolder(foldername);
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Saved Success",
-        });
+        return await responseService.apiSuccessResponse(res, null);
       } else {
-        next("failed");
+        return await responseService.apiFailResponse(res, 'Id is Required');
       }
     } catch (error) {
       next(error);
@@ -71,13 +64,9 @@ export class Controller {
       if (data.foldername) {
         const foldername = data.foldername;
         let folder = await deleteFolder(foldername);
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Saved Success",
-        });
+        return await responseService.apiSuccessResponse(res, null);
       } else {
-        next("failed");
+        return await responseService.apiFailResponse(res, 'Id is Required');
       }
     } catch (error) {
       next(error);
@@ -91,13 +80,9 @@ export class Controller {
       if (data.filekey) {
         const filekey = data.filekey;
         let folder = await deleteFile(filekey);
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Saved Success",
-        });
+        return await responseService.apiSuccessResponse(res, null);
       } else {
-        next("failed");
+        return await responseService.apiFailResponse(res, 'Id is Required');
       }
     } catch (error) {
       next(error);
@@ -113,13 +98,9 @@ export class Controller {
         let image = await upload(buffer, originalname, data.foldername);
         console.log(image.Location);
         data.image = image.Location;
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Saved Success",
-        });
+        return await responseService.apiSuccessResponse(res, null);
       } else {
-        next("image is required");
+        return await responseService.apiFailResponse(res, 'Image is Required');
       }
     } catch (error) {
       next(error);

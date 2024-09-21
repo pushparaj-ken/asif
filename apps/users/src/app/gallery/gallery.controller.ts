@@ -1,7 +1,8 @@
 import { PrismaService, Prisma } from '@asif/prisma-client';
 const prisma = new PrismaService();
 import _ from 'lodash';
-import { sendEmail } from '@asif/services'
+import { APIResponseService } from '@asif/services'
+const responseService = new APIResponseService();
 
 export class GallerytController {
 
@@ -31,14 +32,9 @@ export class GallerytController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -68,14 +64,9 @@ export class GallerytController {
         include: { gallerysubcategory: true }
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -106,14 +97,9 @@ export class GallerytController {
         include: { gallery: true, gallerycategory: true }
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {

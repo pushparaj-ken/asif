@@ -3,6 +3,8 @@ const prisma = new PrismaService();
 import _ from 'lodash';
 import { upload } from "@asif/services";
 const foldername = "Instructor";
+import { APIResponseService } from '@asif/services'
+const responseService = new APIResponseService();
 
 export class Controller {
 
@@ -21,11 +23,7 @@ export class Controller {
       }
 
       const Create = await prisma.instructor.create({ data: data })
-      res.status(200).json({
-        success: true,
-        code: 200,
-        status: "Data Saved Success",
-      });
+      return await responseService.apiSuccessResponse(res, null);
     } catch (error) {
       next(error);
     }
@@ -49,13 +47,9 @@ export class Controller {
         }
 
         const Update = await prisma.instructor.update({ data, where })
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Update Success",
-        });
+        return await responseService.apiSuccessResponse(res, null);
       } else {
-        return next(new Error('Id is Required to Update Role'))
+        return await responseService.apiFailResponse(res, 'Id is Required');
       }
 
     } catch (error) {
@@ -70,13 +64,9 @@ export class Controller {
       if (params.id !== '' && params.id !== null && params.id !== undefined) {
         const where = { slug: params.id }
         const Detele = await prisma.instructor.delete({ where })
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Deleted Success",
-        });
+        return await responseService.apiSuccessResponse(res, null);
       } else {
-        return next(new Error('Id is Required to Delete Role'))
+        return await responseService.apiFailResponse(res, 'Id is Required');
       }
     } catch (error) {
       next(error)
@@ -105,14 +95,9 @@ export class Controller {
         include: { instructorSection: true }
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {

@@ -4,6 +4,8 @@ const prisma = new PrismaService();
 import { CreateAuthDto } from '../auth/dto/auth.dto';
 import _ from 'lodash';
 import { getJWTToken } from "@asif/services";
+import { APIResponseService } from '@asif/services'
+const responseService = new APIResponseService();
 
 export class AuthController {
 
@@ -20,13 +22,11 @@ export class AuthController {
         } else {
           const token = getJWTToken((Adminuser.slug).toString(), "Admin")
           let Adminuserdetails = _.omit(Adminuser, ['password']);
-          res.status(200).json({
-            success: true,
-            code: 200,
-            status: "Data Saved Success",
-            Data: Adminuserdetails,
-            Token: token,
-          });
+          let Data = {
+            ...Adminuserdetails,
+            token
+          }
+          return await responseService.apiSuccessResponse(res, Data);
         }
       }
     } catch (error) {
@@ -43,11 +43,7 @@ export class AuthController {
     };
     try {
       const Admin = await prisma.adminUser.create({ data: NewUser });
-      res.status(200).json({
-        success: true,
-        code: 200,
-        status: "Data Saved Success",
-      });
+      return await responseService.apiSuccessResponse(res, Admin);
     } catch (error) {
       next(error);
     }

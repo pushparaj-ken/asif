@@ -2,6 +2,8 @@ import { PrismaService, Prisma } from '@asif/prisma-client';
 const prisma = new PrismaService();
 import _ from 'lodash';
 import { sendEmail } from '@asif/services'
+import { APIResponseService } from '@asif/services'
+const responseService = new APIResponseService();
 
 export class IndexController {
 
@@ -24,14 +26,9 @@ export class IndexController {
         include: { image: true }
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -57,14 +54,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -93,14 +85,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -130,14 +117,9 @@ export class IndexController {
         include: { category: true, planning: true, buttonCourse: true }
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -166,14 +148,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -202,14 +179,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -238,14 +210,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -275,14 +242,9 @@ export class IndexController {
         include: { advantageList: true }
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -312,14 +274,9 @@ export class IndexController {
         include: { homeadvantage: true }
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -348,14 +305,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -382,14 +334,9 @@ export class IndexController {
         include: { Instructor: true }
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -419,14 +366,9 @@ export class IndexController {
         include: { instructorSection: true }
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -452,14 +394,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -475,12 +412,7 @@ export class IndexController {
       const emailddetails = await sendEmail(values.toemail, "IMPORTANT!!!!!SMS API SERVICES ARE DOWN!!!!", content);
       console.log("🚀 ~ IndexController ~ SendMail ~ emailddetails:", emailddetails)
 
-      res.status(200).json({
-        success: true,
-        code: 200,
-        status: "Email Send  Success",
-        Data: emailddetails
-      });
+      return await responseService.apiSuccessResponse(res, emailddetails);
 
     } catch (error) {
       next(error)
@@ -508,14 +440,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -542,14 +469,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -577,14 +499,9 @@ export class IndexController {
         include: { partenaires_image: true }
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -613,14 +530,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
@@ -649,14 +561,9 @@ export class IndexController {
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
       });
       if (List.length > 0) {
-        res.status(200).json({
-          success: true,
-          code: 200,
-          status: "Data Reterived Success",
-          Data: List
-        });
+        return await responseService.apiSuccessResponse(res, List);
       } else {
-        return next(new Error('No Data Found'))
+        return await responseService.apiFailResponse(res, 'No Data Found');
       }
 
     } catch (error) {
