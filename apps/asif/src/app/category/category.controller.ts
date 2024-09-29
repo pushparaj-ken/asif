@@ -12,7 +12,6 @@ export class Controller {
     const data = req.body;
     const files = req.files;
     try {
-      data.tabId = parseInt(data.tabId);
       data.orderby = parseInt(data.orderby);
       if (files.categoryImage) {
         let { buffer, originalname } = files.categoryImage[0];
@@ -35,7 +34,6 @@ export class Controller {
     const files = req.files;
     try {
       if (params.id !== '' && params.id !== null && params.id !== undefined) {
-        data.tabId = parseInt(data.tabId);
         data.orderby = parseInt(data.orderby);
         const where = { slug: params.id }
         if (files.categoryImage) {
