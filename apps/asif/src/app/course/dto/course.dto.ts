@@ -32,4 +32,7 @@ export class CreateDto {
   @IsInt()
   orderby: number;
 
+  @IsString()
+  popular_course: boolean;
+
 }

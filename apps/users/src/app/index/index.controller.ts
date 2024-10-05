@@ -97,7 +97,7 @@ export class IndexController {
 
   async Course(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy, CategoryID, order } = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy, CategoryID, order, popular_course } = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug
@@ -107,6 +107,9 @@ export class IndexController {
       }
       if (CategoryID) {
         where.category = { id: parseInt(CategoryID) }
+      }
+      if (popular_course) {
+        where.popular_course = popular_course === "true" ? true : false
       }
       const List = await prisma.course.findMany({
         skip: skip ? parseInt(skip) : undefined,

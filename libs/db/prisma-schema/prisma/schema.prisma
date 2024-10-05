@@ -92,6 +92,7 @@ model Course {
   benefits         String
   button_name      String
   button_link      String
+  popular_course   Boolean    @default(false)
   categoryId       Int
   orderby          Int
   slug             String     @unique @default(cuid())
@@ -214,6 +215,7 @@ model CallToAction {
   id              Int      @id @default(autoincrement())
   name            String
   subName         String
+  phonenumber     String
   video_link      String
   backgroundImage String
   buttonName      String   @db.VarChar(255)

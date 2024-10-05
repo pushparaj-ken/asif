@@ -18,4 +18,7 @@ export class CreateDto {
   @IsString()
   buttonName: string;
 
+  @IsString()
+  phonenumber: string;
+
 }

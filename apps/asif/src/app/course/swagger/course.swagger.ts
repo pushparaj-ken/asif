@@ -54,6 +54,9 @@
  *         orderby:
  *           type: number
  *           example: 1
+ *         popular_course:
+ *           type: boolean
+ *           example: true
  */
 
 /**
@@ -141,6 +144,12 @@
  *           type: string
  *         required: false
  *         description: Filter by CategoryID
+ *       - in: query
+ *         name: popular_course
+ *         schema:
+ *           type: boolean
+ *         required: false
+ *         description: Filter by Popular Course
  *     responses:
  *       200:
  *         description: Success

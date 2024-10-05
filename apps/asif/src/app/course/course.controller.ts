@@ -14,6 +14,9 @@ export class Controller {
     try {
       data.categoryId = parseInt(data.categoryId);
       data.orderby = parseInt(data.orderby);
+      if (data.popular_course != undefined && data.popular_course != null && data.popular_course != '') {
+        data.popular_course = data.popular_course === "true" ? true : false
+      }
       if (files.courseImage) {
         let { buffer, originalname } = files.courseImage[0];
         let image = await upload(buffer, originalname, foldername);
@@ -44,8 +47,15 @@ export class Controller {
     const files = req.files;
     try {
       if (params.id !== '' && params.id !== null && params.id !== undefined) {
-        data.categoryId = parseInt(data.categoryId);
-        data.orderby = parseInt(data.orderby);
+        if (data.categoryId != undefined && data.categoryId != null && data.categoryId != '') {
+          data.categoryId = parseInt(data.categoryId);
+        }
+        if (data.orderby != undefined && data.orderby != null && data.orderby != '') {
+          data.orderby = parseInt(data.orderby);
+        }
+        if (data.popular_course != undefined && data.popular_course != null && data.popular_course != '') {
+          data.popular_course = data.popular_course === "true" ? true : false
+        }
         const where = { slug: params.id }
         if (files.courseImage) {
           let { buffer, originalname } = files.courseImage[0];
@@ -93,7 +103,7 @@ export class Controller {
 
   async Details(req: any, res: any, next: any) {
     try {
-      const { id, slug, name, skip, take, cursor, orderBy, CategoryID, order } = req.query;
+      const { id, slug, name, skip, take, cursor, orderBy, CategoryID, order, popular_course } = req.query;
       let where: any = {}
       if (slug) {
         where.slug = slug
@@ -104,6 +114,11 @@ export class Controller {
       if (CategoryID) {
         where.category = { id: parseInt(CategoryID) }
       }
+      if (popular_course) {
+        where.popular_course = popular_course === "true" ? true : false
+      }
+
+      console.log("🚀 ~ IndexController ~ Course ~ where:", where)
       const List = await prisma.course.findMany({
         skip: skip ? parseInt(skip) : undefined,
         take: take ? parseInt(take) : undefined,

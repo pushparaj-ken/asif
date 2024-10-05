@@ -34,6 +34,9 @@
  *         buttonName:
  *           type: string
  *           example: buttonName
+ *         phonenumber:
+ *           type: string
+ *           example: phonenumber
  */
 
 /**
