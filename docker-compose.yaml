@@ -1,0 +1,19 @@
+services:
+  database:
+    image: mysql:latest
+    ports:
+      - "3307:3306"
+    networks:
+      - asif-main
+    env_file:
+      - .env
+    volumes:
+      - mysql-data:/var/lib/mysql
+      #- ./init.sql:/docker-entrypoint-initdb.d/init.sql  
+
+networks:
+  asif-main:
+    driver: bridge
+
+volumes:
+  mysql-data:
