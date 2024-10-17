@@ -9,6 +9,7 @@ services:
       - .env
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./mysql-config/my.cnf:/etc/mysql/conf.d/my.cnf
       #- ./init.sql:/docker-entrypoint-initdb.d/init.sql  
 
 networks:
