@@ -40,5 +40,7 @@ router.get('/course-button', IndexController.CourseButton);
 
 router.get('/custom-page', IndexController.CustomPage);
 
+router.get('/news-section', IndexController.NewsSectionDetails);
+
 export default router;
 

@@ -373,6 +373,13 @@ model Employee {
   orderby             Int
   slug                String             @unique @default(cuid())
   status              Int                @default(0)
+  thumimg             String
+  thumtitle           String             @db.Text
+  thumdescription     String             @db.Text
+  thumbuttonname      String             @db.Text
+  thumbuttonlink      String             @db.Text
+  thumprice           String             @db.Text
+  thumoldprice        String             @db.Text
   createdAt           DateTime           @default(now())
   updatedAt           DateTime           @updatedAt
   partenaires_image   PartenairesImage[]
@@ -402,4 +409,18 @@ model News {
   status      Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  NewsSection NewsSection[]
+}
+
+model NewsSection {
+  id          Int          @id @default(autoincrement())
+  title       String
+  newsId      Int
+  description String       @db.Text
+  orderby     Int
+  slug        String       @unique @default(cuid())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  status      Int          @default(0)
+  newsSection News         @relation(fields: [newsId], references: [id])
 }

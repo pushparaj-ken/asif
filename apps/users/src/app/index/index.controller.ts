@@ -531,6 +531,7 @@ export class IndexController {
         cursor: cursor ? { id: parseInt(cursor) } : undefined,
         where,
         orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
+        include: { NewsSection: true },
       });
       if (List.length > 0) {
         return await responseService.apiSuccessResponse(res, List);
@@ -557,6 +558,37 @@ export class IndexController {
         where.link = link
       }
       const List = await prisma.customPage.findMany({
+        skip: skip ? parseInt(skip) : undefined,
+        take: take ? parseInt(take) : undefined,
+        cursor: cursor ? { id: parseInt(cursor) } : undefined,
+        where,
+        orderBy: orderBy ? { [orderBy.toString()]: order || 'asc' } : undefined,
+      });
+      if (List.length > 0) {
+        return await responseService.apiSuccessResponse(res, List);
+      } else {
+        return await responseService.apiFailResponse(res, 'No Data Found');
+      }
+
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async NewsSectionDetails(req: any, res: any, next: any) {
+    try {
+      const { id, slug, name, skip, take, cursor, orderBy, newsId, order } = req.query;
+      let where: any = {}
+      if (slug) {
+        where.slug = slug
+      }
+      if (name) {
+        where.name = { contains: name.toString() }
+      }
+      if (newsId) {
+        where.newsId = parseInt(newsId)
+      }
+      const List = await prisma.newsSection.findMany({
         skip: skip ? parseInt(skip) : undefined,
         take: take ? parseInt(take) : undefined,
         cursor: cursor ? { id: parseInt(cursor) } : undefined,

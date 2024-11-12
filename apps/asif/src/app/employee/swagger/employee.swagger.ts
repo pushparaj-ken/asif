@@ -17,6 +17,13 @@
  *         - image
  *         - description
  *         - planing_description
+ *         - thumimg
+ *         - thumtitle
+ *         - thumdescription
+ *         - thumbuttonname
+ *         - thumbuttonlink
+ *         - thumprice
+ *         - thumoldprice
  *         - orderby
  *       properties:
  *         name:
@@ -32,6 +39,27 @@
  *         planing_description:
  *           type: string
  *           example: link
+ *         thumimg:
+ *           type: string
+ *           example: thumimg
+ *         thumtitle:
+ *           type: string
+ *           example: thumtitle
+ *         thumdescription:
+ *           type: string
+ *           example: thumdescription
+ *         thumbuttonname:
+ *           type: string
+ *           example: thumbuttonname
+ *         thumbuttonlink:
+ *           type: string
+ *           example: thumbuttonlink
+ *         thumprice:
+ *           type: string
+ *           example: thumprice
+ *         thumoldprice:
+ *           type: string
+ *           example: thumoldprice
  *         orderby:
  *           type: string
  *           example: 1
@@ -42,6 +70,13 @@
  *         - image
  *         - description
  *         - planing_description
+ *         - thumimg
+ *         - thumtitle
+ *         - thumdescription
+ *         - thumbuttonname
+ *         - thumbuttonlink
+ *         - thumprice
+ *         - thumoldprice
  *         - orderby
  *       properties:
  *         name:
@@ -57,6 +92,27 @@
  *         planing_description:
  *           type: string
  *           example: link
+ *         thumimg:
+ *           type: string
+ *           example: thumimg
+ *         thumtitle:
+ *           type: string
+ *           example: thumtitle
+ *         thumdescription:
+ *           type: string
+ *           example: thumdescription
+ *         thumbuttonname:
+ *           type: string
+ *           example: thumbuttonname
+ *         thumbuttonlink:
+ *           type: string
+ *           example: thumbuttonlink
+ *         thumprice:
+ *           type: string
+ *           example: thumprice
+ *         thumoldprice:
+ *           type: string
+ *           example: thumoldprice
  *         orderby:
  *           type: string
  *           example: 1

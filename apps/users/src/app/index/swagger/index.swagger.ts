@@ -499,3 +499,32 @@
  *       200:
  *         description: Success
  */
+
+/**
+ * @swagger
+ * /api/users/index/news-section:
+ *   get:
+ *     summary: List 
+ *     tags: [Index]
+ *     parameters:
+ *       - in: query
+ *         name: slug
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by slug
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Filter by name
+ *       - in: query
+ *         name: newsId
+ *         schema:
+ *           type: string
+ *         required: false
+ *     responses:
+ *       200:
+ *         description: Success
+ */
