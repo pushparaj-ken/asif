@@ -12,6 +12,7 @@ import SubscriptionRouter from "./app/subscription/subscription.routes";
 import ContactUsRouter from "./app/contactus/contactus.routes";
 import CoursePurchaseRouter from "./app/coursepurchase/coursepurchase.routes";
 import GalleryRouter from "./app/gallery/gallery.routes";
+import GeneralSettingRouter from "./app/generalsetting/general.routes";
 
 const port = process.env.PORT_USER ? Number(process.env.PORT_USER) : 3000;
 
@@ -38,6 +39,7 @@ app.use('/api/users/subscription', SubscriptionRouter)
 app.use('/api/users/contactus', ContactUsRouter)
 app.use('/api/users/cpurchase', CoursePurchaseRouter)
 app.use('/api/users/gallery', GalleryRouter)
+app.use('/api/users/general', GeneralSettingRouter)
 
 
 app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
