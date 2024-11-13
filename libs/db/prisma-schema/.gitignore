@@ -1,3 +1,8 @@
 node_modules
 # Keep environment variables out of version control
 .env
+
+libs/db/prisma-schema/prisma/migrations/
+libs/db/prisma-schema/prisma/migrations/20240713100114_/migration.sql
+libs/db/prisma-schema/prisma/migrations/20240729100657_/migration.sql
+libs/db/prisma-schema/prisma/migrations/20240730072232_/migration.sql
